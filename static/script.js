@@ -18,5 +18,6 @@ function hideSpinner() {
     document.getElementById("loadingIndicator").style.display = "none";
 }
 
+
 // Initialize scale label
 updateScale(document.getElementById("scale").value);

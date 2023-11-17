@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Resolution Enhancement</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'>
+    <script src="{{ url_for('static', filename='handleImageSlider.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
     <h1>Welcome to Image Resolution Enhancement Web App</h1>
@@ -25,7 +28,7 @@
 
     {% if uploaded_image_base64 and enhanced_image_base64 %}
     <script>hideSpinner()</script>
-    <div class="image-with-title">
+    <!-- <div class="image-with-title">
         <div class="image-container">
             <h2>Original Image</h2>
             <img src="data:image/jpeg;base64,{{ uploaded_image_base64 }}" alt="Original Image">
@@ -34,11 +37,34 @@
             <h2>Enhanced Image</h2>
             <img src="data:image/jpeg;base64,{{ enhanced_image_base64 }}" alt="Enhanced Image">
         </div>
+    </div> -->
+    <!-- <div class="image-container" id="originalImageContainer">
+        <img src="data:image/jpeg;base64,{{ uploaded_image_base64 }}" alt="Original Image">
+        <div class="divider" id="divider"></div>
+    </div>
+    <div class="image-container" id="enhancedImageContainer">
+        <img src="data:image/jpeg;base64,{{ enhanced_image_base64 }}" alt="Enhanced Image">
+    </div> -->
+
+
+
+
+    <!-- <div id="page"> -->
+    <div class="wrapper">
+        <div class="before">
+        <img class="content-image" src="data:image/jpeg;base64,{{ enhanced_image_base64 }}" draggable="false"/>
+        </div>
+        <div class="after">
+        <img class="content-image" src="data:image/jpeg;base64,{{ uploaded_image_base64 }}" draggable="false"/>
+        </div>
+        <div class="scroller">
+        <svg class="scroller__thumb" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><polygon points="0 50 37 68 37 32 0 50" style="fill:#fff"/><polygon points="100 50 64 32 64 68 100 50" style="fill:#fff"/></svg>
+        </div>
+    </div>
+    <!-- </div> -->
     {% endif %}
 
 
 
-
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
