@@ -2,11 +2,11 @@ import base64
 import os
 
 import cv2
+import matplotlib.pyplot as plt
 import numpy as np
 from flask import Flask, render_template, request, url_for
 from flask.helpers import send_file
 from torchsr.models import ninasr_b0
-import matplotlib.pyplot as plt
 
 from src.enhancer import Enhancer
 
@@ -63,4 +63,4 @@ def config():
 
 
 if __name__ == '__main__':
-    app.run(port="8000")
+    app.run(port=process.env.port)
