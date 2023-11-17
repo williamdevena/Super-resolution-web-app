@@ -4,6 +4,7 @@ numpy==1.26.2
 opencv_python==4.8.1.78
 #torch==2.0.0+cpu
 #torchvision==0.16.1+cpu
+gunicorn==21.2.0
 
 # Attempt to reduce slug size by discarding GPU-specific libraries
 --find-links https://download.pytorch.org/whl/cpu/torch_stable.html
