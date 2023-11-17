@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resolution Enhancement</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Welcome to Image Resolution Enhancement App</h1>
+    <p>This is a simple Flask web app.</p>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="image">Upload an image:</label>
+        <input type="file" name="image" id="image" accept="image/*" required>
+        <br>
+        <button type="submit">Upload</button>
+    </form>
+
+
+    {% if uploaded_image_base64 and enhanced_image_base64 %}
+    <div class="image-with-title">
+        <div class="image-container">
+            <h2>Original Image</h2>
+            <img src="data:image/jpeg;base64,{{ uploaded_image_base64 }}" alt="Original Image">
+        </div>
+        <div class="image-container">
+            <h2>Enhanced Image</h2>
+            <img src="data:image/jpeg;base64,{{ enhanced_image_base64 }}" alt="Enhanced Image">
+        </div>
+    {% endif %}
+
+
+</body>
+</html>

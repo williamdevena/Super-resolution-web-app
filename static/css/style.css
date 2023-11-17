@@ -1,0 +1,20 @@
+.image-with-title {
+    display: flex;
+    justify-content: space-around;
+}
+
+.image-container {
+    text-align: center;
+}
+
+.image-container img {
+    width: 700px; /* Adjust as needed */
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.image-container h2 {
+    font-size: 18px;
+    margin: 0;
+}
