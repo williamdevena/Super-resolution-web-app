@@ -63,4 +63,4 @@ def config():
 
 
 if __name__ == '__main__':
-    app.run(port=process.env.port)
+    app.run(port=int(os.environ.get('PORT', 33507)))
