@@ -2,5 +2,6 @@ Flask==3.0.0
 matplotlib==3.8.1
 numpy==1.26.2
 opencv_python==4.8.1.78
+torch==2.0.0+cpu
 torchsr==1.0.4
-torchvision==0.16.1
+torchvision==0.16.1+cpu
