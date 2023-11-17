@@ -15,11 +15,13 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/home')
 def home():
-    config()
     return render_template('index.html', uploaded_image=None)
 
 @app.route('/upload', methods=['POST'])
 def upload():
+    SCALE = 3
+    RESCALING_FACTOR = 0.1
+    MODEL = ninasr_b0
     filestr = request.files['image'].read()
     file_bytes = np.fromstring(filestr, np.uint8)
     image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
@@ -48,16 +50,6 @@ def upload():
     enhanced_image_base64 = base64.b64encode(enhanced_string).decode('utf-8')
 
     return render_template('index.html', uploaded_image_base64=uploaded_image_base64, enhanced_image_base64=enhanced_image_base64)
-
-
-def config():
-    global SCALE
-    global MODEL
-    global RESCALING_FACTOR
-    SCALE = 3
-    RESCALING_FACTOR = 0.1
-    MODEL = ninasr_b0
-
 
 
 
