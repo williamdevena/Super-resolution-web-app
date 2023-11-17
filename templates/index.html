@@ -7,18 +7,24 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Welcome to Image Resolution Enhancement App</h1>
-    <p>This is a simple Flask web app.</p>
+    <h1>Welcome to Image Resolution Enhancement Web App</h1>
 
     <form action="/upload" method="post" enctype="multipart/form-data">
         <label for="image">Upload an image:</label>
         <input type="file" name="image" id="image" accept="image/*" required>
         <br>
-        <button type="submit">Upload</button>
+        <label for="scale">Select scale level:</label>
+        <input type="range" name="scale" id="scale" min="2" max="8" value="2" step="1" oninput="updateScale(this.value)">
+        <output for="scale" id="scaleLabel">2x</output>
+        <br>
+        <button type="submit" onclick="showSpinner()">Upload</button>
     </form>
+
+    <div id="loadingIndicator" class="spinner"></div>
 
 
     {% if uploaded_image_base64 and enhanced_image_base64 %}
+    <script>hideSpinner()</script>
     <div class="image-with-title">
         <div class="image-container">
             <h2>Original Image</h2>
@@ -31,5 +37,8 @@
     {% endif %}
 
 
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
