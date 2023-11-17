@@ -1,7 +1,7 @@
 import cv2
 from torchsr.datasets import Div2K
-
 from torchvision.transforms.functional import to_pil_image, to_tensor
+
 
 class Enhancer():
     def __init__(self, scale, model):
@@ -11,7 +11,6 @@ class Enhancer():
 
     def enhance(self, image):
         image = image / 255
-        #print(image)
         image_tensor = to_tensor(image).unsqueeze(0).float()
         self.model = self.model.float()
         enhanced_image_tensor = self.model(image_tensor)

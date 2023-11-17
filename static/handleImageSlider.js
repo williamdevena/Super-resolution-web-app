@@ -1,9 +1,3 @@
-// const container = document.querySelector('.container');
-// document.querySelector('.slider').addEventListener('input', (e) => {
-// container.style.setProperty('--position', `${e.target.value}%`);
-// })
-
-
 let active = false;
 
 document.querySelector('.scroller').addEventListener('mousedown',function(){
