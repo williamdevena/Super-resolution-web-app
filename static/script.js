@@ -4,7 +4,14 @@ function updateScale(value) {
 }
 
 function showSpinner() {
-    document.getElementById("loadingIndicator").style.display = "flex";
+    var imageInput = document.getElementById("image");
+    if (!imageInput.value.length) {
+        return;
+    }
+    else {
+        document.getElementById("loadingIndicator").style.display = "flex";
+    }
+
 }
 
 function hideSpinner() {
