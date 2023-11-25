@@ -2,9 +2,6 @@ Flask==3.0.0
 matplotlib==3.8.1
 numpy==1.26.2
 opencv-python-headless
-#opencv_python==4.8.1.78
-#torch==2.0.0+cpu
-#torchvision==0.16.1+cpu
 gunicorn==21.2.0
 
 # Attempt to reduce slug size by discarding GPU-specific libraries
