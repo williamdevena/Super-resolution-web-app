@@ -1,4 +1,4 @@
-# Super-resolution-web-app
+# Super resolution web app
 
 ## Description
 This web app allows users to upload images, enhance their resolution, and download the improved images.
