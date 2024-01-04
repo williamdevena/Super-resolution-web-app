@@ -1,11 +1,7 @@
 import base64
-import os
 
 import cv2
-import matplotlib.pyplot as plt
-import numpy as np
-from flask import Flask, render_template, request, url_for
-from flask.helpers import send_file
+from flask import Flask, render_template, request
 from torchsr.models import ninasr_b0, ninasr_b1, ninasr_b2
 
 from src import image_processing

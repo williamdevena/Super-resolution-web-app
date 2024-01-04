@@ -8,10 +8,9 @@ from PIL import Image
 from torch import nn, optim
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
-from torchvision import transforms
 from tqdm import tqdm
 
-from models import esrgan, vgg_loss
+from models import esrgan
 from src import super_resolution_dataset
 from utils import costants
 

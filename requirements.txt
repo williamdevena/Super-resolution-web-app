@@ -1,14 +1,22 @@
+albumentations==1.3.1
+cleanvision==0.3.5
 Flask==3.0.0
+lpips==0.1.4
 matplotlib==3.8.1
+modules==1.0.0
 numpy==1.26.2
+#opencv_python==4.8.1.78
 opencv-python-headless
-gunicorn==21.2.0
+#Pillow==10.1.0
+Pillow==10.2.0
+skimage==0.0
 
 # Attempt to reduce slug size by discarding GPU-specific libraries
 --find-links https://download.pytorch.org/whl/cpu/torch_stable.html
 torch==2.0.1
 --find-links https://download.pytorch.org/whl/cpu/torch_stable.html
-torchvision==0.15.2
 
 torchsr==1.0.4
-
+torchvision==0.15.2
+tqdm==4.66.1
+gunicorn==21.2.0

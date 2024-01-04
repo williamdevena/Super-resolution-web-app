@@ -1,6 +1,4 @@
-import cv2
-from torchsr.datasets import Div2K
-from torchvision.transforms.functional import to_pil_image, to_tensor
+from torchvision.transforms.functional import to_tensor
 
 
 class Enhancer():

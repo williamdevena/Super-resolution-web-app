@@ -6,8 +6,8 @@ import os
 
 import cv2
 import numpy as np
-import skimage
-import torch
+#import skimage
+#import torch
 from PIL import Image
 from tqdm import tqdm
 

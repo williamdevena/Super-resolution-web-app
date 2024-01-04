@@ -3,16 +3,11 @@ import logging
 import os
 from datetime import datetime
 
-import matplotlib.pyplot as plt
 import torch
-from torch import nn, optim
-from torch.utils.data import DataLoader
-from torchvision.transforms import transforms
 
 from models import esrgan
-from src import baselines, super_resolution_dataset, test
-#from src.super_resolution_dataset import SuperResolutionDataset
-from utils import costants, logging_utilities, preprocessing
+from src import baselines, test
+from utils import logging_utilities
 
 
 def main():
