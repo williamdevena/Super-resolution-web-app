@@ -1,2 +1,3 @@
 static/css/old.css
 *_old*
+*__pycache__/*
