@@ -10,7 +10,7 @@ from src import baselines, test
 from utils import logging_utilities
 
 
-def main():
+def main() -> None:
     """
     Executes the all the stages of the project
     """

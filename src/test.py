@@ -1,4 +1,5 @@
 import os
+from typing import Tuple, Union
 
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
@@ -11,7 +12,10 @@ from src import super_resolution_dataset
 from utils import costants, metrics
 
 
-def testing_generator(model, test_dataloader, device, image_folder):
+def testing_generator(model,
+                      test_dataloader: DataLoader,
+                      device: str,
+                      image_folder: str) -> Tuple[float, float, float]:
     """
     Tests a model on the test set a returns the metrics.
 
@@ -65,7 +69,7 @@ def testing_generator(model, test_dataloader, device, image_folder):
     return tot_lpips, tot_ssim, tot_psnr
 
 
-def build_test_dataloader():
+def build_test_dataloader() -> DataLoader:
     """
     Builds and returns the test dataloder
 

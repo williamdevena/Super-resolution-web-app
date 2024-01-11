@@ -1,6 +1,9 @@
 import os
+from typing import List, Tuple, Union
 
+import albumentations as A
 import numpy as np
+import torch
 from PIL import Image
 from torch.utils.data import Dataset
 
@@ -11,7 +14,11 @@ class SuperResolutionDataset(Dataset):
     Image Super Resolution  framework.
     """
 
-    def __init__(self, hr_path, lr_path, transform_both, transform_hr, transform_lr):
+    def __init__(self, hr_path: str,
+                 lr_path: str,
+                 transform_both: A.Compose,
+                 transform_hr: A.Compose,
+                 transform_lr: A.Compose) -> None:
         self.transform_both = transform_both
         self.transform_hr = transform_hr
         self.transform_lr = transform_lr
@@ -20,7 +27,7 @@ class SuperResolutionDataset(Dataset):
         self.list_couples_hr_lr = self.build_list_couples_hr_lr()
 
 
-    def build_list_couples_hr_lr(self):
+    def build_list_couples_hr_lr(self) -> List[str, str]:
         """
         Builds a list of tuples that contain the path of a HR image and
         the path of the corresponding LR image.
@@ -46,11 +53,11 @@ class SuperResolutionDataset(Dataset):
         return list_couples_hr_lr
 
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.list_couples_hr_lr)
 
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx: int) -> Tuple[Union[np.ndarray, torch.Tensor], Union[np.ndarray, torch.Tensor]]:
         hr_image_name, _ = self.list_couples_hr_lr[idx]
         image = np.array(Image.open(hr_image_name))
         image = self.transform_both(image=image)["image"]

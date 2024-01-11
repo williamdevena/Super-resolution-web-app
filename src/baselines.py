@@ -3,18 +3,21 @@ This file contains the baselines used
 """
 import logging
 import os
+from typing import Tuple
 
 import cv2
 import numpy as np
-#import skimage
-#import torch
-from PIL import Image
-from tqdm import tqdm
 
 from utils import costants, logging_utilities, metrics
 
+#import skimage
+#import torch
+# from PIL import Image
+# from tqdm import tqdm
 
-def baselines():
+
+
+def baselines() -> None:
     """
     Runs the baselines and produces metrics.
 
@@ -45,43 +48,12 @@ def baselines():
 
 
 
-def test_baselines(method, test_dataloader, image_folder):
-    if not os.path.exists(image_folder):
-        os.mkdir(image_folder)
-
-    len_dataloader = len(test_dataloader)
-    pbar = tqdm(test_dataloader)
-    tot_lpips = 0
-    tot_ssim = 0
-    tot_psnr = 0
-    pbar.set_description("Testing")
-    for idx, (hr_image, lr_image) in enumerate(pbar):
-        hr_image = np.array(hr_image.squeeze(0).permute(1,2,0))
-        lr_image = np.array(lr_image.squeeze(0).permute(1,2,0))
-
-        size = (hr_image.shape[1], hr_image.shape[0])
-        if method=="bilinear":
-            fake_hr_image = bilinear_interpolation_upscaling(lr_image, size)
-        elif method=="nn":
-            fake_hr_image = nearest_neighbour_upscaling(lr_image, size)
-
-        image_path = os.path.join(image_folder, f"{idx}.png")
-        Image.fromarray(np.uint8(fake_hr_image*255)).convert('RGB').save(image_path)
-
-        lpips, ssim, psnr = metrics.calculate_metrics(hr_image, fake_hr_image, device='cpu')
-        tot_lpips += lpips
-        tot_ssim += ssim
-        tot_psnr += psnr
-
-    tot_lpips /= len(test_dataloader)
-    tot_ssim /= len(test_dataloader)
-    tot_psnr /= len(test_dataloader)
-
-    return tot_lpips, tot_ssim, tot_psnr
 
 
-
-def test_baseline_upscaling(method, test_ds_path, original_ds_path, path_upscaled_folder):
+def test_baseline_upscaling(method: str,
+                            test_ds_path: str,
+                            original_ds_path: str,
+                            path_upscaled_folder: str) -> Tuple[float, float]:
     """
     Applies a baseline method (bilinear interpolation or nearest neighbour)
     for upscaling to a folder of images, writes the results in a new folder
@@ -142,11 +114,12 @@ def test_baseline_upscaling(method, test_ds_path, original_ds_path, path_upscale
     avg_ssim = tot_ssim/len(files)
     avg_lpips = tot_lpips/len(files)
     avg_psnr = tot_psnr/len(files)
+
     return avg_ssim, avg_lpips, avg_psnr
 
 
 
-def bilinear_interpolation_upscaling(img, size):
+def bilinear_interpolation_upscaling(img: np.ndarray, size: Tuple[int, int]) -> np.ndarray:
     """
     Upscales an image using bilinear interpolation.
 
@@ -163,7 +136,7 @@ def bilinear_interpolation_upscaling(img, size):
     return upscaled_img
 
 
-def nearest_neighbour_upscaling(img, size):
+def nearest_neighbour_upscaling(img: np.ndarray, size: Tuple[int, int]) -> np.ndarray:
     """
     Upscales an image using nearest neighbour.
 
@@ -178,3 +151,42 @@ def nearest_neighbour_upscaling(img, size):
     upscaled_img = cv2.resize(img, size, interpolation=cv2.INTER_NEAREST)
 
     return upscaled_img
+
+
+
+
+
+
+# def test_baselines(method: str, test_dataloader, image_folder):
+#     if not os.path.exists(image_folder):
+#         os.mkdir(image_folder)
+
+#     len_dataloader = len(test_dataloader)
+#     pbar = tqdm(test_dataloader)
+#     tot_lpips = 0
+#     tot_ssim = 0
+#     tot_psnr = 0
+#     pbar.set_description("Testing")
+#     for idx, (hr_image, lr_image) in enumerate(pbar):
+#         hr_image = np.array(hr_image.squeeze(0).permute(1,2,0))
+#         lr_image = np.array(lr_image.squeeze(0).permute(1,2,0))
+
+#         size = (hr_image.shape[1], hr_image.shape[0])
+#         if method=="bilinear":
+#             fake_hr_image = bilinear_interpolation_upscaling(lr_image, size)
+#         elif method=="nn":
+#             fake_hr_image = nearest_neighbour_upscaling(lr_image, size)
+
+#         image_path = os.path.join(image_folder, f"{idx}.png")
+#         Image.fromarray(np.uint8(fake_hr_image*255)).convert('RGB').save(image_path)
+
+#         lpips, ssim, psnr = metrics.calculate_metrics(hr_image, fake_hr_image, device='cpu')
+#         tot_lpips += lpips
+#         tot_ssim += ssim
+#         tot_psnr += psnr
+
+#     tot_lpips /= len(test_dataloader)
+#     tot_ssim /= len(test_dataloader)
+#     tot_psnr /= len(test_dataloader)
+
+#     return tot_lpips, tot_ssim, tot_psnr

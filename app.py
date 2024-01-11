@@ -11,12 +11,12 @@ app = Flask(__name__)
 
 @app.route('/')
 @app.route('/home')
-def home():
+def home() -> str:
     return render_template('index.html', uploaded_image=None)
 
 
 @app.route('/upload', methods=['POST'])
-def upload():
+def upload() -> str:
     #MODEL = ninasr_b0
     #MODEL = ninasr_b2
     model = ninasr_b1

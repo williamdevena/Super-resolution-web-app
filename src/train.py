@@ -15,7 +15,7 @@ from src import super_resolution_dataset
 from utils import costants
 
 
-def build_dataloaders(batch_size):
+def build_dataloaders(batch_size: int) -> None:
     """
     Builds and returns training and validation
     dataloaders for the the training stage.
@@ -77,9 +77,9 @@ def build_dataloaders(batch_size):
 
 
 
-def train(start_epoch, num_epochs, device, run_name,
-          weights_folder, batch_size, lr,
-          weights_gen, weights_disc, training_type, name_tensorboard):
+def train(start_epoch: int, num_epochs: int, device: str, run_name: str,
+          weights_folder: str, batch_size: int, lr: float,
+          weights_gen: str, weights_disc: str, training_type: str, name_tensorboard: str) -> None:
     """
     Executes the training stage. It can execute the training
     of the generator or of the discriminator or both together

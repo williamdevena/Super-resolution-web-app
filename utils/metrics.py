@@ -1,18 +1,23 @@
+from typing import Tuple, Union
+
 import lpips
+import numpy as np
 import skimage
 import torch
 from torchvision import transforms
 
 
-def calculate_metrics(original_img, upscaled_img, device):
+def calculate_metrics(original_img: Union[torch.Tensor, np.ndarray],
+                      upscaled_img: Union[torch.Tensor, np.ndarray],
+                      device: str) -> Tuple[float, float, float]:
     """
     Given an original high resolution image and a upscaled
     one, it calculates several metrics to assess the perfomance
     of a upscaling model
 
     Args:
-        - original_img (np.ndarray): original high resolution image
-        - upscaled_img (np.ndarray): upscaled image
+        - original_img (torch.Tensor or np.ndarray): original high resolution image
+        - upscaled_img (torch.Tensor or np.ndarray): upscaled image
 
     Returns:
         - lpips (float): LPIPS (Learned Perceptual Image Patch Similarity) metric
@@ -35,15 +40,17 @@ def calculate_metrics(original_img, upscaled_img, device):
     return lpips, ssim, psnr
 
 
-def calculate_lpips_distance(img1, img2, device):
+def calculate_lpips_distance(img1: Union[torch.Tensor, np.ndarray],
+                             img2: Union[torch.Tensor, np.ndarray],
+                             device: str) -> float:
     """
     Calculates LPIPS distance (also called perceptual loss).
     Reference: "The Unreasonable Effectiveness of Deep Features as a Perceptual Metric"
     Richard Zhang, Phillip Isola, Alexei A. Efros, Eli Shechtman, Oliver Wang. In CVPR, 2018.
 
     Args:
-        - img1 (np.ndarray): fisrt image to compare
-        - img2 (np.ndarray): second image to compare
+        - img1 (torch.Tensor or np.ndarray): fisrt image to compare
+        - img2 (torch.Tensor or np.ndarray): second image to compare
 
     Returns:
         - lpips_distance (float): LPIPS distance

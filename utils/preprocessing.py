@@ -1,4 +1,5 @@
 import os
+from typing import Tuple
 
 import cv2
 from cleanvision.imagelab import Imagelab
@@ -6,7 +7,7 @@ from cleanvision.imagelab import Imagelab
 from utils import costants
 
 
-def analyze_quality_of_images(path_ds):
+def analyze_quality_of_images(path_ds: str) -> None:
     """
     Analyses the overall quality of the dataset by looking
     for things like duplicates, blurry images, and dark images.
@@ -23,7 +24,9 @@ def analyze_quality_of_images(path_ds):
 
 
 
-def create_downsampled_ds(original_ds_path, new_dataset_path, downsample_dimensions):
+def create_downsampled_ds(original_ds_path: str,
+                          new_dataset_path: str,
+                          downsample_dimensions: Tuple[int, int]) -> None:
     """
     Creates a downsampled version of a given dataset.
 
@@ -49,7 +52,7 @@ def create_downsampled_ds(original_ds_path, new_dataset_path, downsample_dimensi
 
 
 
-def rename_images_hr2():
+def rename_images_hr2() -> None:
     ds_path = costants.ORIGINAL_DS_TEST
     for image_name in os.listdir(ds_path):
         if ".png" in image_name:
@@ -64,7 +67,7 @@ def rename_images_hr2():
 
 
 
-def rename_images_x8():
+def rename_images_x8() -> None:
     ds_path = costants.LR_VAL
     for image_name in os.listdir(ds_path):
         if ".png" in image_name:

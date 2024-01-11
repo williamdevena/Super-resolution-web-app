@@ -5,7 +5,7 @@ import logging
 import time
 
 
-def print_name_stage_project(stage):
+def print_name_stage_project(stage: str) -> None:
     '''
     At the beginning of a stage (like Data preparation, data cleaning, ...) it prints
     the name of the stage.
